@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### **File: `README.md`**
 
-## Getting Started
+```markdown
+# Crypto Price Tracker with Wallet Integration
 
-First, run the development server:
+![Project Screenshot](https://via.placeholder.com/800x400) <!-- Replace with a link to your project screenshot -->
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## About the Project
+
+This is a personal project created by **Faathirazukhruf**. It is a web application for tracking real-time cryptocurrency prices and integrating with MetaMask wallets. The application is built using **Next.js** for the frontend and **CoinGecko API** to fetch cryptocurrency price data.
+
+Key Features:
+- Display real-time cryptocurrency prices (Bitcoin, Ethereum, Ripple).
+- Integrate with MetaMask to display wallet address and balance.
+- Price trend charts using **Chart.js**.
+- Responsive design for both mobile and desktop devices.
+
+## Technologies Used
+
+- **Frontend**: 
+  - [Next.js](https://nextjs.org/) - React framework for building web applications.
+  - [React](https://reactjs.org/) - JavaScript library for building user interfaces.
+  - [Chart.js](https://www.chartjs.org/) - Library for creating charts.
+  - [ethers.js](https://docs.ethers.io/) - Library for interacting with Ethereum and MetaMask.
+
+- **Backend**:
+  - [CoinGecko API](https://www.coingecko.com/en/api) - API for fetching cryptocurrency price data.
+
+- **Styling**:
+  - CSS Modules - For component styling.
+  - Google Fonts (Inter) - For the font used in the project.
+
+## How to Run the Project
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+
+### Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Faathirazukhruf/crypto-tracker-frontend.git
+   cd crypto-tracker-frontend
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the Development Server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in Browser**
+   - Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Folder Structure
+
+```
+crypto-tracker-frontend/
+├── public/                  # Folder for static assets (e.g., images, icons)
+├── styles/                  # Folder for CSS files
+│   └── globals.css          # Global CSS file
+├── pages/                   # Folder for pages and API routes
+│   ├── api/                 # Folder for Serverless Functions
+│   │   └── crypto-prices.js # Example API route
+│   ├── index.js             # Main landing page
+│   └── _app.js              # Custom App component
+├── components/              # Folder for reusable components
+│   └── CryptoPriceList.js   # Component for displaying crypto prices
+├── package.json             # File for dependencies and scripts
+├── next.config.js           # Next.js configuration (optional)
+└── README.md                # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributing
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+This is a personal project created by **Faathirazukhruf**. If you'd like to contribute or provide feedback, please open an **issue** or **pull request** in this repository.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
+This project is licensed under the [MIT License](LICENSE).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Made with by **Faathirazukhruf**.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

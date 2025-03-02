@@ -1,0 +1,168 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header Styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ff88;
+  }
+  
+  /* Wallet Connection Button */
+  .connect-wallet-button {
+    padding: 10px 20px;
+    background-color: orangered;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .connect-wallet-button:hover {
+    background-color: rgb(218, 62, 5);
+  }
+  
+  /* Wallet Info */
+  .wallet-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #cccccc;
+  }
+  
+  /* Crypto Price List */
+  .crypto-price-list {
+    margin-top: 30px;
+  }
+  
+  .crypto-price-list h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 20px;
+  }
+  
+  .crypto-price-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .crypto-price-list li {
+    background-color: #2a2a2a;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .crypto-price-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .crypto-price-list li span {
+    font-weight: bold;
+    color: #00ff88;
+  }
+  
+  /* Price Trend Section */
+  .price-trend {
+    margin-top: 30px;
+  }
+  
+  .price-trend h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 20px;
+  }
+  
+  /* Dropdown for Crypto Selection */
+  .crypto-select {
+    padding: 10px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .crypto-select:focus {
+    outline: none;
+    border: 1px solid #00ff88;
+  }
+  
+  /* Chart Container */
+  .chart-container {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #333;
+    font-size: 14px;
+    color: #cccccc;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .connect-wallet-button {
+      margin-top: 10px;
+      width: 100%;
+    }
+  
+    .crypto-price-list li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .crypto-price-list li span {
+      margin-top: 5px;
+    }
+  
+    .chart-container {
+      padding: 10px;
+    }
+  }
