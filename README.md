@@ -1,9 +1,5 @@
-### **File: `README.md`**
-
-```markdown
 # Crypto Price Tracker with Wallet Integration
 
-![Project Screenshot](https://via.placeholder.com/800x400) <!-- Replace with a link to your project screenshot -->
 
 ## About the Project
 
@@ -86,8 +82,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-Made with by **Faathirazukhruf**.
-```
+Made by **Faathirazukhruf**.
 
----
 
