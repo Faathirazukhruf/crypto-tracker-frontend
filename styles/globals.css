@@ -22,6 +22,7 @@ body {
   color: var(--text);
   position: relative;
   overflow-x: hidden;
+  max-width: 100%;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 30%),
     radial-gradient(circle at 90% 80%, rgba(110, 0, 255, 0.03) 0%, transparent 30%);
@@ -47,7 +48,8 @@ body::before {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  animation: fadeIn 0.8s ease-out;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Header Styles */
@@ -60,17 +62,6 @@ body::before {
   position: relative;
 }
 
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--primary), transparent);
-  animation: scanline 4s linear infinite;
-}
-
 .header h1 {
   font-size: 28px;
   font-weight: bold;
@@ -78,21 +69,7 @@ body::before {
   font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
-  position: relative;
   margin: 0;
-  text-shadow: 0 0 10px var(--primary-glow);
-  animation: pulse 3s infinite;
-}
-
-.header h1::before {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 50%;
-  height: 2px;
-  background: var(--primary);
-  opacity: 0.6;
 }
 
 /* Wallet Connection Button */
@@ -105,86 +82,44 @@ body::before {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.connect-wallet-button:hover {
+  background-color: var(--primary);
+  color: var(--darker);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.connect-wallet-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
 }
 
 .connect-wallet-button img {
   margin-right: 10px;
+  max-width: 24px;
+  max-height: 24px;
+  transition: transform 0.3s ease;
 }
 
-.connect-wallet-button:hover {
-  background-color: #ff4500;
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  border-left: 3px solid var(--primary);
-}
-
-@media (max-width: 480px) {
-  .connect-wallet-button {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
-
-  .connect-wallet-button img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-  }
-}
-
-/* Wallet Info */
-.wallet-info {
-  margin-top: 15px;
-  padding: 10px 15px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  background-color: rgba(42, 42, 42, 0.7);
-  border-radius: 8px;
-  border-left: 3px solid var(--primary);
-  display: inline-block;
-  animation: slideIn 0.5s ease-out;
+.connect-wallet-button:hover img {
+  transform: rotate(360deg);
 }
 
 /* Crypto Price List */
-.crypto-price-list {
-  margin-top: 30px;
-  position: relative;
-  animation: slideUp 0.7s ease-out;
-}
-
-.crypto-price-list h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--primary);
-  margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif;
-  position: relative;
-  display: inline-block;
-}
-
-.crypto-price-list h2::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), transparent);
-}
-
 .crypto-price-list ul {
   list-style-type: none;
   padding: 0;
-  position: relative;
 }
 
 .crypto-price-list li {
@@ -197,89 +132,31 @@ body::before {
   align-items: center;
   font-size: 16px;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border-left: 3px solid transparent;
-}
-
-.crypto-price-list li::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(0, 255, 136, 0.05), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
+  cursor: pointer;
 }
 
 .crypto-price-list li:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  border-left: 3px solid var(--primary);
+  background-color: rgba(0, 255, 136, 0.1);
+  transform: translateX(10px);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
 }
 
-.crypto-price-list li:hover::before {
-  transform: translateX(0);
+.price-positive {
+  color: #00ff88 !important;
+  transition: color 0.3s ease;
 }
 
-.crypto-price-list li span {
-  font-weight: bold;
-  color: var(--primary);
-  text-shadow: 0 0 5px var(--primary-glow);
+.price-negative {
+  color: #ff4500 !important;
+  transition: color 0.3s ease;
 }
 
-/* Price Trend Section */
-.price-trend {
-  margin-top: 30px;
-  position: relative;
-  animation: slideUp 0.9s ease-out;
+.crypto-price-list li:hover .price-positive {
+  color: #00cc66 !important;
 }
 
-.price-trend h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--primary);
-  margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif;
-  position: relative;
-  display: inline-block;
-}
-
-.price-trend h2::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), transparent);
-}
-
-/* Dropdown for Crypto Selection */
-.crypto-select {
-  padding: 12px 15px;
-  background-color: var(--card-bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
-}
-
-.crypto-select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 10px var(--primary-glow);
-}
-
-.crypto-select:hover {
-  border-color: var(--primary);
+.crypto-price-list li:hover .price-negative {
+  color: #ff3300 !important;
 }
 
 /* Chart Container */
@@ -287,193 +164,8 @@ body::before {
   background-color: var(--card-bg);
   padding: 25px;
   border-radius: 12px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.chart-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  background: 
-    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 136, 0.03) 2px, rgba(0, 255, 136, 0.03) 4px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Blockchain animation elements */
-.crypto-price-list::after, .price-trend::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 10px;
-  height: 100%;
-  width: 3px;
-  pointer-events: none;
-}
-
-.crypto-price-list::after {
-  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 20px, var(--primary) 20px, var(--primary) 22px);
-  background-size: 100% 42px;
-  animation: blockchainAnimation 1.5s linear infinite;
-}
-
-.price-trend::after {
-  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 30px, var(--secondary) 30px, var(--secondary) 32px);
-  background-size: 100% 62px;
-  animation: blockchainAnimation 2s linear infinite;
-}
-
-/* Loading and Error States */
-.loading, .error {
-  padding: 15px;
-  margin: 15px 0;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.loading {
-  background-color: rgba(0, 255, 136, 0.1);
-  color: var(--primary);
-  position: relative;
-  overflow: hidden;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 30%;
-  background-color: var(--primary);
-  animation: loadingBar 1.5s infinite;
-}
-
-.error {
-  background-color: rgba(255, 69, 0, 0.1);
-  color: var(--accent);
-}
-
-/* Footer Styles */
-.footer {
-  margin-top: 60px;
-  padding: 25px 0;
-  text-align: center;
-  position: relative;
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 25%;
-  width: 50%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
-}
-
-.footer p {
-  margin: 0;
-  position: relative;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-20px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pulse {
-  0% { text-shadow: 0 0 5px var(--primary-glow); }
-  50% { text-shadow: 0 0 15px var(--primary-glow); }
-  100% { text-shadow: 0 0 5px var(--primary-glow); }
-}
-
-@keyframes scanline {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes buttonScan {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-@keyframes blockchainAnimation {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 42px; }
-}
-
-@keyframes loadingBar {
-  0% { left: 0; width: 0; }
-  50% { width: 100%; }
-  100% { left: 100%; width: 0; }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .connect-wallet-button {
-    margin-top: 15px;
-    width: 100%;
-  }
-
-  .crypto-price-list li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .crypto-price-list li span {
-    margin-top: 10px;
-  }
-
-  .chart-container {
-    padding: 15px;
-  }
-}
-
-/* Price Change Color Indicators */
-.crypto-price-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-.price-positive {
-  color: #00ff88 !important; /* Neon green for price increase */
-}
-
-.price-negative {
-  color: #ff4500 !important; /* Orangered for price decrease */
-}
-
-/* Responsive Chart Styling */
-.chart-container {
-  width: 100%;
-  height: 400px; /* Fixed height for consistent view */
+  height: 400px;
   max-height: 500px;
   min-height: 300px;
   position: relative;
@@ -482,37 +174,34 @@ body::before {
 .chart-container canvas {
   width: 100% !important;
   height: 100% !important;
-  max-height: 500px;
 }
 
-/* Ensure chart is readable on smaller devices */
-@media (max-width: 768px) {
-  .chart-container {
-    height: 250px; /* Smaller height for mobile */
-  }
-
-  .crypto-select {
-    width: 100%;
-  }
-}
-
-/* Improve chart readability */
-.chart-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
+/* Dropdown */
+.crypto-select {
   width: 100%;
-  height: 20px;
-  background: linear-gradient(transparent, var(--card-bg));
-  pointer-events: none;
-  z-index: 1;
+  padding: 12px 15px;
+  background-color: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
-/* Responsive Typography for Smaller Screens */
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 22px;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .connect-wallet-button {
+    width: 100%;
+    margin-top: 15px;
   }
 
   .crypto-price-list li {
@@ -520,7 +209,43 @@ body::before {
     align-items: flex-start;
   }
 
-  .crypto-price-list li span {
-    margin-bottom: 5px;
+  .chart-container {
+    height: 250px;
+    padding: 15px;
   }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  /* Disable some animations on mobile for better performance */
+  .connect-wallet-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .crypto-price-list li:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Wallet Info */
+.wallet-info {
+  margin-top: 15px;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  background-color: rgba(42, 42, 42, 0.7);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding: 25px 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
 }

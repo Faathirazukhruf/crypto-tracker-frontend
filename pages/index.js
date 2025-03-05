@@ -190,7 +190,7 @@ export default function Home() {
 
       {/* Price Trend Section */}
       <div className="price-trend">
-        <h2>Price Trend =    </h2>
+        <h2>Price Trend</h2>
         <select
           className="crypto-select"
           value={selectedCrypto}
