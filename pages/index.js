@@ -26,6 +26,7 @@ ChartJS.register(
 
 export default function Home() {
   const [cryptoPrices, setCryptoPrices] = useState({});
+  const [previousPrices, setPreviousPrices] = useState({});
   const [walletAddress, setWalletAddress] = useState("");
   const [walletBalance, setWalletBalance] = useState("");
   const [selectedCrypto, setSelectedCrypto] = useState("bitcoin");
@@ -35,10 +36,23 @@ export default function Home() {
   const fetchCryptoPrices = async () => {
     try {
       const response = await axios.get("/api/crypto-prices");
+      setPreviousPrices(cryptoPrices); // Store previous prices
       setCryptoPrices(response.data);
     } catch (error) {
       console.error("Error fetching crypto prices:", error);
     }
+  };
+
+  // Determine price change color
+  const getPriceChangeClass = (crypto) => {
+    if (!previousPrices[crypto]) return '';
+    
+    const currentPrice = cryptoPrices[crypto]?.usd;
+    const previousPrice = previousPrices[crypto]?.usd;
+    
+    if (currentPrice > previousPrice) return 'price-positive';
+    if (currentPrice < previousPrice) return 'price-negative';
+    return '';
   };
 
   // Fetch price history for selected crypto
@@ -75,7 +89,43 @@ export default function Home() {
   useEffect(() => {
     fetchCryptoPrices();
     fetchPriceHistory();
+    
+    // Fetch prices every 30 seconds
+    const intervalId = setInterval(fetchCryptoPrices, 30000);
+    return () => clearInterval(intervalId);
   }, [selectedCrypto]);
+
+  // Chart configuration for better responsiveness
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: `${selectedCrypto.toUpperCase()} Price Trend`,
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          maxRotation: 0,
+          autoSkip: true,
+          autoSkipPadding: 10,
+        },
+      },
+      y: {
+        ticks: {
+          callback: function(value) {
+            return '$' + value.toLocaleString();
+          }
+        }
+      }
+    }
+  };
 
   // Chart data
   const chartData = {
@@ -86,17 +136,35 @@ export default function Home() {
         data: priceHistory.map((price) => price[1]),
         borderColor: "#00ff88", // Neon green
         backgroundColor: "rgba(0, 255, 136, 0.2)", // Light neon green
+        tension: 0.4, // Smooth curve
+        pointRadius: 5, // Larger points
+        pointHoverRadius: 8, // Larger points on hover
       },
     ],
   };
 
   return (
     <div className="container">
-      {/* Header */}
       <div className="header">
         <h1>Crypto Price Tracker</h1>
         <button className="connect-wallet-button" onClick={connectWallet}>
-          {walletAddress ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : "Connect MetaMask"}
+          {walletAddress ? (
+            `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+          ) : (
+            <>
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" 
+                alt="MetaMask Logo" 
+                style={{
+                  width: '24px', 
+                  height: '24px', 
+                  marginRight: '10px', 
+                  verticalAlign: 'middle'
+                }} 
+              />
+              Connect MetaMask
+            </>
+          )}
         </button>
       </div>
 
@@ -111,7 +179,10 @@ export default function Home() {
         <ul>
           {Object.entries(cryptoPrices).map(([crypto, data]) => (
             <li key={crypto}>
-              <span>{crypto.toUpperCase()}</span>: ${data.usd}
+              <span>{crypto.toUpperCase()}</span>: 
+              <span className={getPriceChangeClass(crypto)}>
+                ${data.usd}
+              </span>
             </li>
           ))}
         </ul>
@@ -119,7 +190,7 @@ export default function Home() {
 
       {/* Price Trend Section */}
       <div className="price-trend">
-        <h2>Price Trend</h2>
+        <h2>Price Trend =    </h2>
         <select
           className="crypto-select"
           value={selectedCrypto}
@@ -130,7 +201,7 @@ export default function Home() {
           <option value="ripple">Ripple</option>
         </select>
         <div className="chart-container">
-          <Line data={chartData} />
+          <Line data={chartData} options={chartOptions} />
         </div>
       </div>
 
